@@ -5,115 +5,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TVA Terminal</title>
 
-<!-- Orbitron gives us that TVA digital feel -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        background-color: #000;
-        font-family: 'Orbitron', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+body {
+    margin: 0;
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-    .terminal {
-        position: relative;
-        width: 90vw;
-        height: 90vh;
-        border: 14px solid #ff6a00;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
+.terminal {
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    border: 8px solid #ff6a00;
+    box-sizing: border-box;
+    overflow: hidden;
+}
 
-    /* Grid Background */
-    .terminal::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: 
-            linear-gradient(rgba(255,106,0,0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,106,0,0.15) 1px, transparent 1px);
-        background-size: 40px 40px;
-        z-index: 0;
-    }
+/* Grid */
+.terminal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
 
-    .content {
-        position: relative;
-        z-index: 1;
-        color: #ff6a00;
-        height: 100%;
-        padding: 30px;
-        box-sizing: border-box;
-    }
+/* TVA logo top right */
+.tva-top {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    height: 40px;
+}
 
-    /* Top Left Name */
-    .name {
-        position: absolute;
-        top: 20px;
-        left: 25px;
-        font-size: 1.2rem;
-        letter-spacing: 3px;
-    }
+/* Vertical name */
+.left-vertical {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: #ff6a00;
+    opacity: 0.8;
+}
 
-    /* TVA Logo Top Right */
-    .tva {
-        position: absolute;
-        top: 20px;
-        right: 25px;
-        font-size: 3rem;
-        font-weight: 600;
-        letter-spacing: 5px;
-    }
+/* Right side numbers */
+.right-vertical {
+    position: absolute;
+    top: 120px;
+    right: 10px;
+    writing-mode: vertical-rl;
+    color: #ff6a00;
+    opacity: 0.7;
+}
 
-    /* Right Side Vertical Numbers */
-    .vertical-data {
-        position: absolute;
-        right: 10px;
-        top: 30%;
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-        font-size: 0.9rem;
-        opacity: 0.7;
-    }
+/* Bottom right birthday */
+.bottom-vertical {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    writing-mode: vertical-rl;
+    color: #ff6a00;
+    opacity: 0.7;
+}
 
-    /* Bottom Right Birthday */
-    .birthday {
-        position: absolute;
-        bottom: 20px;
-        right: 25px;
-        font-size: 1rem;
-        letter-spacing: 2px;
-    }
-
-    /* Subtle Glow */
-    .name, .tva, .vertical-data, .birthday {
-        text-shadow: 0 0 8px rgba(255,106,0,0.6);
-    }
+.text-glow {
+    text-shadow: 0 0 8px rgba(255,106,0,0.7);
+}
 </style>
 </head>
 
 <body>
-    <div class="terminal">
-        <div class="content">
 
-            <div class="name">CLOE</div>
+<div class="terminal text-glow">
 
-            <div class="tva">TVA</div>
+    <img src="tva_text_left.png" class="tva-top">
 
-            <div class="vertical-data">
-                2661 90 82<br>
-                19 02 61<br>
-                75 59 31
-            </div>
+    <div class="left-vertical">CLOE</div>
 
-            <div class="birthday">
-                10.12.1989
-            </div>
+    <div class="right-vertical">2661 90 82</div>
 
-        </div>
-    </div>
+    <div class="bottom-vertical">10.12.1989</div>
+
+</div>
+
 </body>
 </html>
