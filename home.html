@@ -16,16 +16,16 @@
 
 html, body {
     height: 100%;
-    overflow: hidden; /* prevents scrolling */
+    overflow: hidden;
     background: black;
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Terminal Frame */
+/* Terminal Frame - FIXED HEIGHT */
 .terminal {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh; /* dynamic viewport height fixes iPhone issue */
     border: 8px solid #ff6a00;
     overflow: hidden;
 }
@@ -46,7 +46,7 @@ html, body {
     position: absolute;
     top: 18px;
     right: 20px;
-    height: 55px; /* slightly bigger */
+    height: 60px;
 }
 
 /* Vertical Name */
@@ -62,11 +62,11 @@ html, body {
     text-shadow: 0 0 8px rgba(255,106,0,0.7);
 }
 
-/* Birthday moved closer to border */
+/* Birthday closer to border */
 .bottom-vertical {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 6px;
+    right: 6px;
     writing-mode: vertical-rl;
     color: #ff6a00;
     opacity: 0.7;
@@ -77,7 +77,7 @@ html, body {
 /* Action List Section */
 .action-list {
     position: absolute;
-    top: 40%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -93,8 +93,8 @@ html, body {
 
 .action-title {
     font-weight: 800;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
 }
 
 .select-program {
@@ -102,7 +102,7 @@ html, body {
 }
 
 .program-options {
-    margin-top: 20px; /* small space before options */
+    margin-top: 25px;
     line-height: 2;
 }
 
@@ -143,7 +143,6 @@ html, body {
 </div>
 
 <script>
-/* Reveal Action List after 2 seconds */
 setTimeout(() => {
     document.getElementById("actionList").classList.add("visible");
 }, 2000);
