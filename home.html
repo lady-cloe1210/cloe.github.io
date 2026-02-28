@@ -5,29 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TVA Terminal</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
+* {
     margin: 0;
-    background: black;
-    font-family: 'Orbitron', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden; /* prevents scrolling */
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Terminal Frame */
 .terminal {
     position: relative;
-    width: 95vw;
-    height: 95vh;
+    width: 100vw;
+    height: 100vh;
     border: 8px solid #ff6a00;
-    box-sizing: border-box;
     overflow: hidden;
 }
 
-/* Grid */
+/* Grid Background */
 .terminal::before {
     content: "";
     position: absolute;
@@ -38,64 +41,113 @@ body {
     background-size: 40px 40px;
 }
 
-/* TVA logo top right */
+/* TVA Logo */
 .tva-top {
     position: absolute;
-    top: 15px;
+    top: 18px;
     right: 20px;
-    height: 40px;
+    height: 55px; /* slightly bigger */
 }
 
-/* Vertical name */
+/* Vertical Name */
 .left-vertical {
     position: absolute;
-    top: 50px;
-    left: 10px;
+    top: 60px;
+    left: 6px;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     color: #ff6a00;
-    opacity: 0.8;
+    opacity: 0.85;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(255,106,0,0.7);
 }
 
-/* Right side numbers */
-.right-vertical {
+/* Birthday moved closer to border */
+.bottom-vertical {
     position: absolute;
-    top: 120px;
+    bottom: 10px;
     right: 10px;
     writing-mode: vertical-rl;
     color: #ff6a00;
     opacity: 0.7;
-}
-
-/* Bottom right birthday */
-.bottom-vertical {
-    position: absolute;
-    bottom: 30px;
-    right: 40px;
-    writing-mode: vertical-rl;
-    color: #ff6a00;
-    opacity: 0.7;
-}
-
-.text-glow {
+    font-size: 0.9rem;
     text-shadow: 0 0 8px rgba(255,106,0,0.7);
+}
+
+/* Action List Section */
+.action-list {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ff6a00;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    text-shadow: 0 0 8px rgba(255,106,0,0.7);
+}
+
+.action-list.visible {
+    opacity: 1;
+}
+
+.action-title {
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.select-program {
+    font-size: 1rem;
+}
+
+.program-options {
+    margin-top: 20px; /* small space before options */
+    line-height: 2;
+}
+
+.program-options a {
+    text-decoration: none;
+    color: #ff6a00;
+    transition: 0.3s;
+}
+
+.program-options a:hover {
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(255,106,0,1);
 }
 </style>
 </head>
 
 <body>
 
-<div class="terminal text-glow">
+<div class="terminal">
 
     <img src="tva_text_left.png" class="tva-top">
 
     <div class="left-vertical">CLOE</div>
 
-    <div class="right-vertical">2661 90 82</div>
-
     <div class="bottom-vertical">10.12.1989</div>
 
+    <div class="action-list" id="actionList">
+        <div class="action-title">ACTION LIST /////</div>
+        <div class="select-program">SELECT PROGRAM</div>
+
+        <div class="program-options">
+            <div><a href="profile.html">1. VARIANT FILE 1210</a></div>
+            <div>2. TBD</div>
+            <div>3. TBD</div>
+        </div>
+    </div>
+
 </div>
+
+<script>
+/* Reveal Action List after 2 seconds */
+setTimeout(() => {
+    document.getElementById("actionList").classList.add("visible");
+}, 2000);
+</script>
 
 </body>
 </html>
