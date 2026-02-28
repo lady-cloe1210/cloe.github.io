@@ -8,26 +8,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
+* {
     margin: 0;
-    background: black;
-    font-family: 'Orbitron', sans-serif;
-    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Main Screen */
 .screen {
     position: relative;
     width: 100vw;
-    height: 100vh;
-    border: 8px solid #ff6a00;
-    box-sizing: border-box;
+    height: 100dvh; /* dynamic viewport height fix */
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    transition: background 1s ease;
 }
 
-/* Grid */
-.screen::before {
+/* Border + Grid (hidden initially) */
+.border-grid {
+    position: absolute;
+    inset: 0;
+    border: 8px solid #ff6a00;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.border-grid::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -37,12 +52,22 @@ body {
     background-size: 40px 40px;
 }
 
+/* TVA Emblem */
+#emblem {
+    width: 280px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 5;
+}
+
+/* Text */
 .content {
     position: relative;
     color: #ff6a00;
     font-size: 1.2rem;
     text-align: center;
     text-shadow: 0 0 8px rgba(255,106,0,0.7);
+    z-index: 6;
 }
 
 .big-warning {
@@ -50,23 +75,16 @@ body {
     font-weight: 800;
 }
 
-#emblem {
-    position: absolute;
-    width: 200px;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
+/* Flashing Warning */
 .flash {
     animation: flash 0.4s infinite;
 }
-
 @keyframes flash {
     0%,100%{opacity:1;}
     50%{opacity:0;}
 }
 
-/* Old-school distortion lines */
+/* Old scan distortion */
 .distort::after {
     content: "";
     position: absolute;
@@ -81,16 +99,33 @@ body {
     animation: scan 0.3s linear 6;
     pointer-events: none;
 }
-
 @keyframes scan {
     0% { transform: translateY(-10px); }
     100% { transform: translateY(10px); }
 }
 
+/* Full black flash overlay */
+.black-flash {
+    position: absolute;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    z-index: 10;
+}
+
+.black-flash.active {
+    animation: blackout 0.15s linear;
+}
+
+@keyframes blackout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Fade out */
 .fade-out {
     animation: fadeOut 1s forwards;
 }
-
 @keyframes fadeOut {
     to { opacity: 0; }
 }
@@ -100,14 +135,23 @@ body {
 <body>
 
 <div class="screen" id="screen">
+
+    <div class="border-grid" id="borderGrid"></div>
+
     <img src="tva_emblem.png" id="emblem">
+
     <div class="content" id="text"></div>
+
+    <div class="black-flash" id="blackFlash"></div>
+
 </div>
 
 <script>
 const emblem = document.getElementById("emblem");
 const text = document.getElementById("text");
 const screen = document.getElementById("screen");
+const borderGrid = document.getElementById("borderGrid");
+const blackFlash = document.getElementById("blackFlash");
 
 function typeText(message, speed = 50, callback) {
     text.innerHTML = "";
@@ -124,12 +168,37 @@ function typeText(message, speed = 50, callback) {
     typing();
 }
 
+function flashBlack(times, callback) {
+    let count = 0;
+    function doFlash() {
+        if (count < times) {
+            blackFlash.classList.add("active");
+            setTimeout(() => {
+                blackFlash.classList.remove("active");
+                count++;
+                setTimeout(doFlash, 100);
+            }, 150);
+        } else if (callback) {
+            callback();
+        }
+    }
+    doFlash();
+}
+
 window.onload = () => {
 
+    // Step 1: Emblem appears
     setTimeout(() => emblem.style.opacity = 1, 300);
-    setTimeout(() => emblem.style.opacity = 0, 2000);
 
+    // Step 2: Emblem fades out
+    setTimeout(() => emblem.style.opacity = 0, 1500);
+
+    // Step 3: Border + Grid fade in
+    setTimeout(() => borderGrid.style.opacity = 1, 2000);
+
+    // Step 4: Begin text sequence
     setTimeout(() => {
+
         typeText("Unauthorized Access", 40, () => {
 
             setTimeout(() => {
@@ -151,16 +220,22 @@ window.onload = () => {
                                 setTimeout(() => {
 
                                     screen.classList.remove("distort");
-                                    text.classList.remove("big-warning");
 
-                                    typeText("ACCESS GRANTED", 50, () => {
+                                    // Freeze moment
+                                    flashBlack(3, () => {
 
-                                        setTimeout(() => {
-                                            screen.classList.add("fade-out");
+                                        text.classList.remove("big-warning");
+
+                                        typeText("ACCESS GRANTED", 50, () => {
+
                                             setTimeout(() => {
-                                                window.location.href = "home.html";
+                                                screen.classList.add("fade-out");
+                                                setTimeout(() => {
+                                                    window.location.href = "home.html";
+                                                }, 1000);
                                             }, 1000);
-                                        }, 1000);
+
+                                        });
 
                                     });
 
@@ -176,7 +251,8 @@ window.onload = () => {
             }, 1000);
 
         });
-    }, 3000);
+
+    }, 2500);
 };
 </script>
 
