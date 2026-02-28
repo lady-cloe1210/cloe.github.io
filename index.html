@@ -15,19 +15,18 @@ body {
     overflow: hidden;
 }
 
-/* Thick TVA Border */
 .screen {
     position: relative;
     width: 100vw;
     height: 100vh;
-    border: 14px solid #ff6a00;
+    border: 8px solid #ff6a00;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Grid Background */
+/* Grid */
 .screen::before {
     content: "";
     position: absolute;
@@ -36,56 +35,58 @@ body {
         linear-gradient(rgba(255,106,0,0.15) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,106,0,0.15) 1px, transparent 1px);
     background-size: 40px 40px;
-    z-index: 0;
 }
 
 .content {
     position: relative;
-    z-index: 2;
     color: #ff6a00;
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-align: center;
-    text-shadow: 0 0 10px rgba(255,106,0,0.7);
+    text-shadow: 0 0 8px rgba(255,106,0,0.7);
 }
 
-.bold {
+.big-warning {
+    font-size: 3rem;
     font-weight: 800;
 }
 
-/* TVA Emblem */
 #emblem {
     position: absolute;
-    width: 220px;
+    width: 200px;
     opacity: 0;
     transition: opacity 1s ease;
-    z-index: 3;
 }
 
-/* Flashing warning */
 .flash {
     animation: flash 0.4s infinite;
 }
 
 @keyframes flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    0%,100%{opacity:1;}
+    50%{opacity:0;}
 }
 
-/* Glitch Effect */
-.glitch {
-    animation: glitch 0.3s ease-in-out 4;
+/* Old-school distortion lines */
+.distort::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,106,0,0.15),
+        rgba(255,106,0,0.15) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    animation: scan 0.3s linear 6;
+    pointer-events: none;
 }
 
-@keyframes glitch {
-    0% { transform: translate(0); filter: hue-rotate(0); }
-    20% { transform: translate(-5px, 5px); filter: hue-rotate(20deg); }
-    40% { transform: translate(5px, -5px); filter: hue-rotate(-20deg); }
-    60% { transform: translate(-3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); filter: hue-rotate(0); }
+@keyframes scan {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(10px); }
 }
 
-/* Fade out */
 .fade-out {
     animation: fadeOut 1s forwards;
 }
@@ -123,60 +124,42 @@ function typeText(message, speed = 50, callback) {
     typing();
 }
 
-/* Sequence */
-
 window.onload = () => {
 
-    // Show emblem
-    setTimeout(() => {
-        emblem.style.opacity = 1;
-    }, 300);
+    setTimeout(() => emblem.style.opacity = 1, 300);
+    setTimeout(() => emblem.style.opacity = 0, 2000);
 
-    // Hold emblem
     setTimeout(() => {
-        emblem.style.opacity = 0;
-    }, 2000);
-
-    // Unauthorized Access
-    setTimeout(() => {
-        typeText("Unauthorized Access", 50, () => {
+        typeText("Unauthorized Access", 40, () => {
 
             setTimeout(() => {
-
-                // Facial Analysis Pending
-                typeText("Facial Analysis Pending", 50, () => {
+                typeText("Facial Analysis Pending", 40, () => {
 
                     setTimeout(() => {
 
-                        // VARIANT DETECTED
+                        text.classList.add("big-warning");
+
                         typeText("VARIANT DETECTED", 60, () => {
 
-                            text.classList.add("bold");
                             text.classList.add("flash");
 
                             setTimeout(() => {
 
                                 text.classList.remove("flash");
-
-                                // Glitch
-                                screen.classList.add("glitch");
+                                screen.classList.add("distort");
 
                                 setTimeout(() => {
 
-                                    screen.classList.remove("glitch");
-                                    text.classList.remove("bold");
+                                    screen.classList.remove("distort");
+                                    text.classList.remove("big-warning");
 
-                                    // Access Granted
-                                    typeText("ACCESS GRANTED", 60, () => {
+                                    typeText("ACCESS GRANTED", 50, () => {
 
                                         setTimeout(() => {
-
                                             screen.classList.add("fade-out");
-
                                             setTimeout(() => {
                                                 window.location.href = "home.html";
                                             }, 1000);
-
                                         }, 1000);
 
                                     });
@@ -190,7 +173,6 @@ window.onload = () => {
                     }, 2000);
 
                 });
-
             }, 1000);
 
         });
