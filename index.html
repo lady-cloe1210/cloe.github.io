@@ -25,12 +25,8 @@ html, body {
 .screen {
     position: relative;
     width: 100vw;
-    height: 100dvh; /* dynamic viewport height fix */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100dvh;
     overflow: hidden;
-    transition: background 1s ease;
 }
 
 /* Border + Grid (hidden initially) */
@@ -54,37 +50,48 @@ html, body {
 
 /* TVA Emblem */
 #emblem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 280px;
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 5;
 }
 
-/* Text */
+/* Centered Text */
 .content {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #ff6a00;
     font-size: 1.2rem;
     text-align: center;
     text-shadow: 0 0 8px rgba(255,106,0,0.7);
     z-index: 6;
+    width: 90%;
 }
 
+/* Large Warning Text */
 .big-warning {
     font-size: 3rem;
     font-weight: 800;
+    letter-spacing: 3px;
 }
 
 /* Flashing Warning */
 .flash {
     animation: flash 0.4s infinite;
 }
+
 @keyframes flash {
     0%,100%{opacity:1;}
     50%{opacity:0;}
 }
 
-/* Old scan distortion */
+/* Distortion */
 .distort::after {
     content: "";
     position: absolute;
@@ -99,6 +106,7 @@ html, body {
     animation: scan 0.3s linear 6;
     pointer-events: none;
 }
+
 @keyframes scan {
     0% { transform: translateY(-10px); }
     100% { transform: translateY(10px); }
@@ -126,6 +134,7 @@ html, body {
 .fade-out {
     animation: fadeOut 1s forwards;
 }
+
 @keyframes fadeOut {
     to { opacity: 0; }
 }
@@ -138,7 +147,7 @@ html, body {
 
     <div class="border-grid" id="borderGrid"></div>
 
-    <img src="tva_emblem.png" id="emblem">
+    <img src="tva_emblem.png" id="emblem" alt="TVA Emblem">
 
     <div class="content" id="text"></div>
 
@@ -176,7 +185,7 @@ function flashBlack(times, callback) {
             setTimeout(() => {
                 blackFlash.classList.remove("active");
                 count++;
-                setTimeout(doFlash, 100);
+                setTimeout(doFlash, 120);
             }, 150);
         } else if (callback) {
             callback();
@@ -187,16 +196,16 @@ function flashBlack(times, callback) {
 
 window.onload = () => {
 
-    // Step 1: Emblem appears
+    /* Emblem appears */
     setTimeout(() => emblem.style.opacity = 1, 300);
 
-    // Step 2: Emblem fades out
+    /* Emblem fades */
     setTimeout(() => emblem.style.opacity = 0, 1500);
 
-    // Step 3: Border + Grid fade in
+    /* Border + grid fade in */
     setTimeout(() => borderGrid.style.opacity = 1, 2000);
 
-    // Step 4: Begin text sequence
+    /* Begin text sequence */
     setTimeout(() => {
 
         typeText("Unauthorized Access", 40, () => {
@@ -221,7 +230,7 @@ window.onload = () => {
 
                                     screen.classList.remove("distort");
 
-                                    // Freeze moment
+                                    /* Black flash sequence */
                                     flashBlack(3, () => {
 
                                         text.classList.remove("big-warning");
