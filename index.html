@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TVA Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+}
+
+/* Thick TVA Border */
+.screen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    border: 14px solid #ff6a00;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Grid Background */
+.screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.15) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: #ff6a00;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255,106,0,0.7);
+}
+
+.bold {
+    font-weight: 800;
+}
+
+/* TVA Emblem */
+#emblem {
+    position: absolute;
+    width: 220px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 3;
+}
+
+/* Flashing warning */
+.flash {
+    animation: flash 0.4s infinite;
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Glitch Effect */
+.glitch {
+    animation: glitch 0.3s ease-in-out 4;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); filter: hue-rotate(0); }
+    20% { transform: translate(-5px, 5px); filter: hue-rotate(20deg); }
+    40% { transform: translate(5px, -5px); filter: hue-rotate(-20deg); }
+    60% { transform: translate(-3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); filter: hue-rotate(0); }
+}
+
+/* Fade out */
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen" id="screen">
+    <img src="tva_emblem.png" id="emblem">
+    <div class="content" id="text"></div>
+</div>
+
+<script>
+const emblem = document.getElementById("emblem");
+const text = document.getElementById("text");
+const screen = document.getElementById("screen");
+
+function typeText(message, speed = 50, callback) {
+    text.innerHTML = "";
+    let i = 0;
+    function typing() {
+        if (i < message.length) {
+            text.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        } else if (callback) {
+            callback();
+        }
+    }
+    typing();
+}
+
+/* Sequence */
+
+window.onload = () => {
+
+    // Show emblem
+    setTimeout(() => {
+        emblem.style.opacity = 1;
+    }, 300);
+
+    // Hold emblem
+    setTimeout(() => {
+        emblem.style.opacity = 0;
+    }, 2000);
+
+    // Unauthorized Access
+    setTimeout(() => {
+        typeText("Unauthorized Access", 50, () => {
+
+            setTimeout(() => {
+
+                // Facial Analysis Pending
+                typeText("Facial Analysis Pending", 50, () => {
+
+                    setTimeout(() => {
+
+                        // VARIANT DETECTED
+                        typeText("VARIANT DETECTED", 60, () => {
+
+                            text.classList.add("bold");
+                            text.classList.add("flash");
+
+                            setTimeout(() => {
+
+                                text.classList.remove("flash");
+
+                                // Glitch
+                                screen.classList.add("glitch");
+
+                                setTimeout(() => {
+
+                                    screen.classList.remove("glitch");
+                                    text.classList.remove("bold");
+
+                                    // Access Granted
+                                    typeText("ACCESS GRANTED", 60, () => {
+
+                                        setTimeout(() => {
+
+                                            screen.classList.add("fade-out");
+
+                                            setTimeout(() => {
+                                                window.location.href = "home.html";
+                                            }, 1000);
+
+                                        }, 1000);
+
+                                    });
+
+                                }, 1200);
+
+                            }, 2000);
+
+                        });
+
+                    }, 2000);
+
+                });
+
+            }, 1000);
+
+        });
+    }, 3000);
+};
+</script>
+
+</body>
+</html>
