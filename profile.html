@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variant File 1210</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff6a00;
+}
+
+/* Outer TVA Border */
+.wrapper {
+    min-height: 100dvh;
+    border: 8px solid #ff6a00;
+    padding: 30px;
+    position: relative;
+}
+
+/* Grid Background */
+.wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* Main File Container */
+.file-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Header Section */
+.file-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    border: 2px solid #ff6a00;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Profile Image */
+.profile-img {
+    width: 220px;
+    border: 4px solid #ff6a00;
+}
+
+/* Name */
+.name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+/* Status Badge */
+.status-line {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.status-badge {
+    background: #ff6a00;
+    color: black;
+    padding: 4px 10px;
+    font-weight: 800;
+    margin-left: 8px;
+}
+
+/* Info Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.info-box {
+    border: 2px solid #ff6a00;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Section Blocks */
+.section {
+    border: 2px solid #ff6a00;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.section p {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.footer-note {
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 40px;
+}
+
+/* Mobile Adjustments */
+@media(max-width: 768px) {
+    .file-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 180px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+<div class="file-container">
+
+    <!-- HEADER -->
+    <div class="file-header">
+
+        <img src="tva_profile_img.png" alt="Cloe" class="profile-img">
+
+        <div>
+            <div class="name">CLOE</div>
+
+            <div class="status-line">
+                STATUS:
+                <span class="status-badge">SINGLE</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-box">Sex: F</div>
+                <div class="info-box">Age: 36</div>
+                <div class="info-box">Sign: Sagittarius</div>
+                <div class="info-box">Children: 1 (Age 14)</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section">
+        <div class="section-title">VARIANT PROFILE SUMMARY</div>
+        <p>
+            Independent. Loyal. Emotionally intelligent. Slightly sarcastic in high-pressure timelines.
+            I’m someone who values depth over surface, connection over convenience,
+            and laughter over everything. I believe in showing up for the people I care about.
+            I’m a mom first, but I’m also a woman who still believes in romance,
+            chemistry, and building something real.
+        </p>
+    </div>
+
+    <!-- INTERESTS -->
+    <div class="section">
+        <div class="section-title">INTERESTS & HOBBIES</div>
+        <p>
+            • Deep conversations that last until 2AM<br>
+            • Music that hits you in the chest<br>
+            • Good food (especially when shared)<br>
+            • Road trips with no strict destination<br>
+            • Personal growth & mindset evolution<br>
+            • Laughing at absolutely inappropriate moments<br>
+            • Sci-fi, psychological thrillers, and clever writing
+        </p>
+    </div>
+
+    <!-- WHAT IM LOOKING FOR -->
+    <div class="section">
+        <div class="section-title">PARTNER CRITERIA</div>
+        <p>
+            Looking for someone emotionally available, consistent, kind,
+            and self-aware. A man who communicates instead of disappearing,
+            who protects what he builds, and who understands that attraction
+            isn’t just physical — it’s mental and energetic.
+            Bonus points if you can make me laugh without trying too hard.
+        </p>
+    </div>
+
+    <!-- FUN FACTS -->
+    <div class="section">
+        <div class="section-title">ADDITIONAL DATA</div>
+        <p>
+            • I overthink sometimes, but I care deeply.<br>
+            • I can be soft and strong at the same time.<br>
+            • I don’t do casual connections — I do intentional ones.<br>
+            • If I choose you, it means something.
+        </p>
+    </div>
+
+    <div class="footer-note">
+        TVA ARCHIVE FILE // VARIANT 1210 // AUTHORIZED ACCESS ONLY
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>
