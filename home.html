@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TVA Terminal</title>
+<title>TVA Home</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -19,133 +19,148 @@ html, body {
     overflow: hidden;
     background: black;
     font-family: 'Orbitron', sans-serif;
+    color: #ff6a00;
 }
 
-/* Terminal Frame - FIXED HEIGHT */
-.terminal {
+/* Main Screen */
+.screen {
     position: relative;
     width: 100vw;
-    height: 100dvh; /* dynamic viewport height fixes iPhone issue */
+    height: 100dvh;
     border: 8px solid #ff6a00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     overflow: hidden;
 }
 
 /* Grid Background */
-.terminal::before {
+.screen::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255,106,0,0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,106,0,0.15) 1px, transparent 1px);
+        linear-gradient(rgba(255,106,0,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.1) 1px, transparent 1px);
     background-size: 40px 40px;
+    pointer-events: none;
 }
 
-/* TVA Logo */
-.tva-top {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    height: 60px;
+/* Content */
+.content {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 700px;
 }
 
-/* Vertical Name */
-.left-vertical {
-    position: absolute;
-    top: 60px;
-    left: 6px;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    color: #ff6a00;
-    opacity: 0.85;
-    font-size: 1rem;
-    text-shadow: 0 0 8px rgba(255,106,0,0.7);
+/* Title Text */
+.main-text {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
 }
 
-/* Birthday closer to border */
-.bottom-vertical {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    writing-mode: vertical-rl;
-    color: #ff6a00;
-    opacity: 0.7;
-    font-size: 0.9rem;
-    text-shadow: 0 0 8px rgba(255,106,0,0.7);
+.sub-text {
+    margin-bottom: 30px;
+    opacity: 0.8;
 }
 
-/* Action List Section */
-.action-list {
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #ff6a00;
+/* Hidden Action Section */
+.action-section {
     opacity: 0;
-    transition: opacity 1.2s ease;
-    text-shadow: 0 0 8px rgba(255,106,0,0.7);
+    transition: opacity 1.5s ease;
 }
 
-.action-list.visible {
+.action-section.visible {
     opacity: 1;
 }
 
+/* Action Headers */
 .action-title {
     font-weight: 800;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
 }
 
 .select-program {
-    font-size: 1rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
 }
 
-.program-options {
-    margin-top: 25px;
-    line-height: 2;
+/* Program Links */
+.program-list {
+    list-style: none;
+    padding: 0;
 }
 
-.program-options a {
+.program-list li {
+    margin: 12px 0;
+}
+
+.program-list a {
     text-decoration: none;
     color: #ff6a00;
-    transition: 0.3s;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border: 2px solid #ff6a00;
+    display: inline-block;
 }
 
-.program-options a:hover {
-    letter-spacing: 2px;
-    text-shadow: 0 0 12px rgba(255,106,0,1);
+/* Remove hover animation entirely */
+.program-list a:hover {
+    background: none;
+    color: #ff6a00;
+}
+
+/* Mobile tweaks */
+@media(max-width: 600px) {
+    .main-text {
+        font-size: 1.2rem;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="terminal">
+<div class="screen">
 
-    <img src="tva_text_left.png" class="tva-top">
-
-    <div class="left-vertical">CLOE</div>
-
-    <div class="bottom-vertical">10.12.1989</div>
-
-    <div class="action-list" id="actionList">
-        <div class="action-title">ACTION LIST</div>
-        <div class="select-program">SELECT PROGRAM</div>
-
-        <div class="program-options">
-            <div><a href="profile.html">1. VARIANT FILE 1210</a></div>
-            <div>2. TBD</div>
-            <div>3. TBD</div>
+    <div class="content">
+        <div class="main-text">
+            Hello there…
         </div>
+
+        <div class="sub-text">
+            You have successfully decrypted Cloe’s file.<br>
+            Proceed carefully. Not all are worthy.
+        </div>
+
+        <div class="action-section" id="actionSection">
+
+            <div class="action-title">ACTION LIST /////</div>
+            <div class="select-program">SELECT PROGRAM</div>
+
+            <ul class="program-list">
+                <li><a href="profile.html">1. VARIANT FILE 1210</a></li>
+                <li><a href="photos.html">2. BRANCH ANALYSIS</a></li>
+                <li><a href="socials.html">3. TIMELINE ARCHIVE</a></li>
+                <li><a href="date.html">4. NEXUS EVENT</a></li>
+                <li><a href="contact.html">5. CROSS-TIMELINE TRANSMISSION</a></li>
+            </ul>
+
+        </div>
+
     </div>
 
 </div>
 
 <script>
+/* Delayed appearance of action list */
 setTimeout(() => {
-    document.getElementById("actionList").classList.add("visible");
-}, 2000);
+    document.getElementById("actionSection").classList.add("visible");
+}, 2500);
 </script>
 
 </body>
