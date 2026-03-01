@@ -25,7 +25,7 @@ html, body {
     position: relative;
     min-height: 100vh;
     border: 8px solid #ff6a00;
-    padding: 100px 20px 60px 20px;
+    padding: 120px 20px 60px 20px;
     overflow-x: hidden;
 }
 
@@ -47,7 +47,7 @@ html, body {
     position: absolute;
     top: 30px;
     left: 30px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .header h1 {
@@ -69,32 +69,29 @@ html, body {
     z-index: 2;
 }
 
-/* Wavy Branch Line */
-.timeline::before {
-    content: "";
+/* Wavy SVG Line */
+.branch-line {
     position: absolute;
     left: 50%;
     top: 0;
-    width: 60px;
-    height: 100%;
     transform: translateX(-50%);
-    background: url("data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 2000' preserveAspectRatio='none'>
-        <path d='M30 0 Q55 150 30 300 T30 600 T30 900 T30 1200 T30 1500 T30 1800 T30 2000'
-        stroke='%23ff6a00'
-        stroke-width='4'
-        fill='none'/>
-    </svg>");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    filter: drop-shadow(0 0 6px #ff6a00);
-    animation: pulse 4s infinite alternate ease-in-out;
+    height: 100%;
+    width: 80px;
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* Subtle Glow Animation */
+.branch-line path {
+    stroke: #ff6a00;
+    stroke-width: 4;
+    fill: none;
+    filter: drop-shadow(0 0 8px #ff6a00);
+    animation: pulse 3s infinite alternate ease-in-out;
+}
+
 @keyframes pulse {
     from { filter: drop-shadow(0 0 4px #ff6a00); }
-    to { filter: drop-shadow(0 0 10px #ff6a00); }
+    to { filter: drop-shadow(0 0 12px #ff6a00); }
 }
 
 /* Timeline Items */
@@ -102,6 +99,8 @@ html, body {
     position: relative;
     width: 50%;
     padding: 40px;
+    margin-bottom: 60px;
+    z-index: 2;
 }
 
 .timeline-item img {
@@ -126,22 +125,17 @@ html, body {
     left: 50%;
 }
 
-/* Spacing between items */
-.timeline-item {
-    margin-bottom: 60px;
-}
-
-/* Mobile */
+/* Mobile Layout */
 @media(max-width: 768px) {
 
-    .timeline::before {
-        left: 20px;
+    .branch-line {
+        left: 25px;
         transform: none;
     }
 
     .timeline-item {
         width: 100%;
-        padding-left: 60px;
+        padding-left: 70px;
         padding-right: 20px;
         text-align: left;
     }
@@ -163,6 +157,16 @@ html, body {
     </div>
 
     <div class="timeline">
+
+        <!-- Wavy Branch SVG -->
+        <svg class="branch-line" viewBox="0 0 100 2000" preserveAspectRatio="none">
+            <path d="M50 0 
+                     Q80 200 50 400 
+                     T50 800 
+                     T50 1200 
+                     T50 1600 
+                     T50 2000" />
+        </svg>
 
         <div class="timeline-item left">
             <img src="https://via.placeholder.com/400x500" alt="Photo 1">
