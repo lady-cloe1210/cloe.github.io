@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branch Analysis</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff6a00;
+}
+
+/* Outer Border */
+.wrapper {
+    min-height: 100dvh;
+    border: 8px solid #ff6a00;
+    padding: 40px 20px;
+    position: relative;
+}
+
+/* Grid Background */
+.wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+}
+
+.header p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Timeline Container */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+    z-index: 2;
+}
+
+/* Vertical Branch Line */
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #ff6a00;
+    box-shadow: 0 0 10px #ff6a00;
+    transform: translateX(-50%);
+}
+
+/* Timeline Item */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 30px;
+}
+
+/* Left Side */
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+}
+
+/* Right Side */
+.timeline-item.right {
+    left: 50%;
+}
+
+/* Photo Box */
+.photo-box {
+    border: 3px solid #ff6a00;
+    padding: 10px;
+    background: black;
+}
+
+.photo-box img {
+    width: 100%;
+    display: block;
+}
+
+/* Caption */
+.caption {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+/* Node Circle */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    width: 14px;
+    height: 14px;
+    background: black;
+    border: 3px solid #ff6a00;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.timeline-item.left::before {
+    right: -9px;
+}
+
+.timeline-item.right::before {
+    left: -9px;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 20px;
+        margin-bottom: 40px;
+    }
+
+    .timeline-item.left,
+    .timeline-item.right {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-item::before {
+        left: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <div class="header">
+        <h1>BRANCH ANALYSIS</h1>
+        <p>Temporal Variant Visual Record</p>
+    </div>
+
+    <div class="timeline">
+
+        <!-- ITEM 1 -->
+        <div class="timeline-item left">
+            <div class="photo-box">
+                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+01" alt="Photo 1">
+                <div class="caption">
+                    Timeline Event 01 — Probably laughing at something inappropriate.
+                </div>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="timeline-item right">
+            <div class="photo-box">
+                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+02" alt="Photo 2">
+                <div class="caption">
+                    Timeline Event 02 — Rare serious moment (documented evidence).
+                </div>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="timeline-item left">
+            <div class="photo-box">
+                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+03" alt="Photo 3">
+                <div class="caption">
+                    Timeline Event 03 — Branch stability remains high.
+                </div>
+            </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="timeline-item right">
+            <div class="photo-box">
+                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+04" alt="Photo 4">
+                <div class="caption">
+                    Timeline Event 04 — Field observation complete.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
