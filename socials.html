@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Archive</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff6a00;
+}
+
+/* TVA Frame */
+.screen {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    border: 8px solid #ff6a00;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Grid Background */
+.screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+}
+
+.header p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Archive Panel */
+.archive-panel {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Social Module */
+.social-module {
+    border: 3px solid #ff6a00;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #ff6a00;
+}
+
+/* Icon Box */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #ff6a00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Label */
+.social-label {
+    font-weight: 600;
+    letter-spacing: 2px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Small TVA arrows */
+.arrow {
+    font-size: 1.2rem;
+}
+
+/* Optional subtle tap effect */
+.social-module:active {
+    background: rgba(255,106,0,0.1);
+}
+
+/* Mobile font adjust */
+@media(max-width: 500px) {
+    .social-label {
+        font-size: 0.9rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="header">
+        <h1>TIMELINE ARCHIVE</h1>
+        <p>External Temporal Signal Monitoring</p>
+    </div>
+
+    <div class="archive-panel">
+
+        <!-- FACEBOOK -->
+        <a href="#" class="social-module">
+            <div class="icon-box">
+                F
+            </div>
+            <div class="social-label">FACEBOOK NODE</div>
+            <div class="arrow">></div>
+        </a>
+
+        <!-- INSTAGRAM -->
+        <a href="#" class="social-module">
+            <div class="icon-box">
+                IG
+            </div>
+            <div class="social-label">INSTAGRAM NODE</div>
+            <div class="arrow">></div>
+        </a>
+
+        <!-- TIKTOK -->
+        <a href="#" class="social-module">
+            <div class="icon-box">
+                TT
+            </div>
+            <div class="social-label">TIKTOK NODE</div>
+            <div class="arrow">></div>
+        </a>
+
+        <!-- OPTIONAL: YOUTUBE -->
+        <a href="#" class="social-module">
+            <div class="icon-box">
+                YT
+            </div>
+            <div class="social-label">YOUTUBE NODE</div>
+            <div class="arrow">></div>
+        </a>
+
+        <!-- OPTIONAL: THREADS -->
+        <a href="#" class="social-module">
+            <div class="icon-box">
+                TH
+            </div>
+            <div class="social-label">THREADS NODE</div>
+            <div class="arrow">></div>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
