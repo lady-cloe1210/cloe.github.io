@@ -28,10 +28,6 @@ html, body {
     width: 100vw;
     height: 100dvh;
     border: 8px solid #ff6a00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     overflow: hidden;
 }
 
@@ -47,77 +43,76 @@ html, body {
     pointer-events: none;
 }
 
-/* Content */
+/* TVA Logo Top Right */
+.logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 80px;
+    z-index: 5;
+}
+
+/* Header Info Top Left */
+.header-info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    z-index: 5;
+}
+
+/* Center Content */
 .content {
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
     width: 90%;
-    max-width: 700px;
 }
 
-/* Title Text */
-.main-text {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
-
-.sub-text {
-    margin-bottom: 30px;
-    opacity: 0.8;
-}
-
-/* Hidden Action Section */
-.action-section {
-    opacity: 0;
-    transition: opacity 1.5s ease;
-}
-
-.action-section.visible {
-    opacity: 1;
-}
-
-/* Action Headers */
+/* Action List */
 .action-title {
     font-weight: 800;
     letter-spacing: 3px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .select-program {
     margin-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
-/* Program Links */
+/* Program Options */
 .program-list {
     list-style: none;
     padding: 0;
 }
 
 .program-list li {
-    margin: 12px 0;
+    margin: 10px 0;
 }
 
 .program-list a {
     text-decoration: none;
     color: #ff6a00;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Smaller so they stay on one line */
     letter-spacing: 1px;
-    padding: 6px 10px;
-    border: 2px solid #ff6a00;
-    display: inline-block;
 }
 
-/* Remove hover animation entirely */
-.program-list a:hover {
-    background: none;
-    color: #ff6a00;
+/* Subtle hover for desktop only */
+@media (hover: hover) {
+    .program-list a:hover {
+        text-shadow: 0 0 8px #ff6a00;
+    }
 }
 
-/* Mobile tweaks */
+/* Mobile tweak */
 @media(max-width: 600px) {
-    .main-text {
-        font-size: 1.2rem;
+    .program-list a {
+        font-size: 0.85rem;
     }
 }
 </style>
@@ -127,41 +122,32 @@ html, body {
 
 <div class="screen">
 
+    <!-- TVA Logo -->
+    <img src="tva_emblem.png" class="logo" alt="TVA Logo">
+
+    <!-- Name + Birth Date -->
+    <div class="header-info">
+        VARIANT: CLOE<br>
+        DOB: 12.10.1988
+    </div>
+
+    <!-- Center Content -->
     <div class="content">
-        <div class="main-text">
-            Hello there…
-        </div>
 
-        <div class="sub-text">
-            You have successfully decrypted Cloe’s file.<br>
-            Proceed carefully. Not all are worthy.
-        </div>
+        <div class="action-title">ACTION LIST /////</div>
+        <div class="select-program">SELECT PROGRAM</div>
 
-        <div class="action-section" id="actionSection">
-
-            <div class="action-title">ACTION LIST /////</div>
-            <div class="select-program">SELECT PROGRAM</div>
-
-            <ul class="program-list">
-                <li><a href="profile.html">1. VARIANT FILE 1210</a></li>
-                <li><a href="photos.html">2. BRANCH ANALYSIS</a></li>
-                <li><a href="socials.html">3. TIMELINE ARCHIVE</a></li>
-                <li><a href="date.html">4. NEXUS EVENT</a></li>
-                <li><a href="contact.html">5. CROSS-TIMELINE TRANSMISSION</a></li>
-            </ul>
-
-        </div>
+        <ul class="program-list">
+            <li><a href="profile.html">1. VARIANT FILE 1210</a></li>
+            <li><a href="photos.html">2. BRANCH ANALYSIS</a></li>
+            <li><a href="socials.html">3. TIMELINE ARCHIVE</a></li>
+            <li><a href="date.html">4. NEXUS EVENT</a></li>
+            <li><a href="contact.html">5. CROSS-TIMELINE TRANSMISSION</a></li>
+        </ul>
 
     </div>
 
 </div>
-
-<script>
-/* Delayed appearance of action list */
-setTimeout(() => {
-    document.getElementById("actionSection").classList.add("visible");
-}, 2500);
-</script>
 
 </body>
 </html>
