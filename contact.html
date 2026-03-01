@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cross-Timeline Transmission</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff6a00;
+}
+
+/* Wrapper */
+.wrapper {
+    min-height: 100dvh;
+    border: 8px solid #ff6a00;
+    padding: 40px 20px;
+    position: relative;
+}
+
+/* Grid Background */
+.wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* Content */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    letter-spacing: 3px;
+    font-size: 1.6rem;
+}
+
+.header p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+input, textarea {
+    background: black;
+    border: 2px solid #ff6a00;
+    padding: 10px;
+    color: #ff6a00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 8px #ff6a00;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background: #ff6a00;
+    color: black;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Success Message (hidden by default) */
+.success-message {
+    display: none;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+<div class="container">
+
+    <div class="header">
+        <h1>CROSS-TIMELINE TRANSMISSION</h1>
+        <p>Submit request for Nexus Event Consideration</p>
+    </div>
+
+    <form action="https://formspree.io/f/maqdzqrg" method="POST">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="Name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="Email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" name="Age" min="18" required>
+        </div>
+
+        <div class="form-group">
+            <label>Location (City/State)</label>
+            <input type="text" name="Location">
+        </div>
+
+        <div class="form-group">
+            <label>Who is your favorite Marvel character? (This is a test)</label>
+            <input type="text" name="Favorite Marvel Character" required>
+        </div>
+
+        <div class="form-group">
+            <label>Why do you want to be my date to Doomsday?</label>
+            <textarea name="Why Doomsday Date" rows="6" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>What makes you different from other variants?</label>
+            <textarea name="What Makes You Different" rows="4"></textarea>
+        </div>
+
+        <!-- Optional hidden subject line -->
+        <input type="hidden" name="_subject" value="New Cross-Timeline Transmission Submission">
+
+        <button type="submit">INITIATE CONTACT</button>
+
+    </form>
+
+</div>
+</div>
+
+</body>
+</html>
