@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Branch Analysis</title>
+<title>BRANCH ANALYSIS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -14,151 +14,140 @@
     box-sizing: border-box;
 }
 
-body {
-    background: black;
+html, body {
+    background: #000000;
     font-family: 'Orbitron', sans-serif;
     color: #ff6a00;
 }
 
-/* Outer Border */
-.wrapper {
-    min-height: 100dvh;
-    border: 8px solid #ff6a00;
-    padding: 40px 20px;
+/* Main Screen */
+.screen {
     position: relative;
+    min-height: 100vh;
+    border: 8px solid #ff6a00;
+    padding: 100px 20px 60px 20px;
+    overflow-x: hidden;
 }
 
 /* Grid Background */
-.wrapper::before {
+.screen::before {
     content: "";
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
+        linear-gradient(rgba(255,106,0,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,106,0,0.1) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
+    z-index: 0;
 }
 
 /* Header */
 .header {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
+    position: absolute;
+    top: 30px;
+    left: 30px;
     z-index: 2;
 }
 
 .header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     letter-spacing: 3px;
 }
 
-.header p {
-    font-size: 0.9rem;
+.subtext {
     opacity: 0.7;
+    font-size: 0.8rem;
+    margin-top: 5px;
 }
 
 /* Timeline Container */
 .timeline {
     position: relative;
     max-width: 1000px;
-    margin: auto;
+    margin: 0 auto;
     z-index: 2;
 }
 
-/* Vertical Branch Line */
+/* Wavy Branch Line */
 .timeline::before {
     content: "";
     position: absolute;
     left: 50%;
     top: 0;
-    width: 4px;
+    width: 60px;
     height: 100%;
-    background: #ff6a00;
-    box-shadow: 0 0 10px #ff6a00;
     transform: translateX(-50%);
+    background: url("data:image/svg+xml;utf8,
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 2000' preserveAspectRatio='none'>
+        <path d='M30 0 Q55 150 30 300 T30 600 T30 900 T30 1200 T30 1500 T30 1800 T30 2000'
+        stroke='%23ff6a00'
+        stroke-width='4'
+        fill='none'/>
+    </svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    filter: drop-shadow(0 0 6px #ff6a00);
+    animation: pulse 4s infinite alternate ease-in-out;
 }
 
-/* Timeline Item */
+/* Subtle Glow Animation */
+@keyframes pulse {
+    from { filter: drop-shadow(0 0 4px #ff6a00); }
+    to { filter: drop-shadow(0 0 10px #ff6a00); }
+}
+
+/* Timeline Items */
 .timeline-item {
     position: relative;
     width: 50%;
-    padding: 20px 30px;
+    padding: 40px;
+}
+
+.timeline-item img {
+    width: 100%;
+    border: 3px solid #ff6a00;
+}
+
+.caption {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    opacity: 0.8;
 }
 
 /* Left Side */
-.timeline-item.left {
+.left {
     left: 0;
     text-align: right;
 }
 
 /* Right Side */
-.timeline-item.right {
+.right {
     left: 50%;
 }
 
-/* Photo Box */
-.photo-box {
-    border: 3px solid #ff6a00;
-    padding: 10px;
-    background: black;
+/* Spacing between items */
+.timeline-item {
+    margin-bottom: 60px;
 }
 
-.photo-box img {
-    width: 100%;
-    display: block;
-}
-
-/* Caption */
-.caption {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    opacity: 0.85;
-}
-
-/* Node Circle */
-.timeline-item::before {
-    content: "";
-    position: absolute;
-    top: 30px;
-    width: 14px;
-    height: 14px;
-    background: black;
-    border: 3px solid #ff6a00;
-    border-radius: 50%;
-    z-index: 5;
-}
-
-.timeline-item.left::before {
-    right: -9px;
-}
-
-.timeline-item.right::before {
-    left: -9px;
-}
-
-/* Responsive */
+/* Mobile */
 @media(max-width: 768px) {
 
     .timeline::before {
         left: 20px;
+        transform: none;
     }
 
     .timeline-item {
         width: 100%;
         padding-left: 60px;
         padding-right: 20px;
-        margin-bottom: 40px;
-    }
-
-    .timeline-item.left,
-    .timeline-item.right {
-        left: 0;
         text-align: left;
     }
 
-    .timeline-item::before {
-        left: 12px;
+    .left, .right {
+        left: 0;
     }
 }
 </style>
@@ -166,53 +155,33 @@ body {
 
 <body>
 
-<div class="wrapper">
+<div class="screen">
 
     <div class="header">
         <h1>BRANCH ANALYSIS</h1>
-        <p>Temporal Variant Visual Record</p>
+        <div class="subtext">MONITORING VARIANT ACTIVITY ACROSS TIMELINES</div>
     </div>
 
     <div class="timeline">
 
-        <!-- ITEM 1 -->
         <div class="timeline-item left">
-            <div class="photo-box">
-                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+01" alt="Photo 1">
-                <div class="caption">
-                    Timeline Event 01 — Probably laughing at something inappropriate.
-                </div>
-            </div>
+            <img src="https://via.placeholder.com/400x500" alt="Photo 1">
+            <div class="caption">Branch Event #001 — Initial divergence recorded.</div>
         </div>
 
-        <!-- ITEM 2 -->
         <div class="timeline-item right">
-            <div class="photo-box">
-                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+02" alt="Photo 2">
-                <div class="caption">
-                    Timeline Event 02 — Rare serious moment (documented evidence).
-                </div>
-            </div>
+            <img src="https://via.placeholder.com/400x500" alt="Photo 2">
+            <div class="caption">Branch Event #002 — Timeline instability increasing.</div>
         </div>
 
-        <!-- ITEM 3 -->
         <div class="timeline-item left">
-            <div class="photo-box">
-                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+03" alt="Photo 3">
-                <div class="caption">
-                    Timeline Event 03 — Branch stability remains high.
-                </div>
-            </div>
+            <img src="https://via.placeholder.com/400x500" alt="Photo 3">
+            <div class="caption">Branch Event #003 — Nexus signature detected.</div>
         </div>
 
-        <!-- ITEM 4 -->
         <div class="timeline-item right">
-            <div class="photo-box">
-                <img src="https://via.placeholder.com/500x600/000000/ff6a00?text=Photo+04" alt="Photo 4">
-                <div class="caption">
-                    Timeline Event 04 — Field observation complete.
-                </div>
-            </div>
+            <img src="https://via.placeholder.com/400x500" alt="Photo 4">
+            <div class="caption">Branch Event #004 — Temporal deviation confirmed.</div>
         </div>
 
     </div>
