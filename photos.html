@@ -64,12 +64,12 @@ html, body {
 /* Timeline Container */
 .timeline {
     position: relative;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     z-index: 2;
 }
 
-/* Wavy SVG Line */
+/* Center Wavy Line */
 .branch-line {
     position: absolute;
     left: 50%;
@@ -77,8 +77,8 @@ html, body {
     transform: translateX(-50%);
     height: 100%;
     width: 80px;
-    z-index: 1;
     pointer-events: none;
+    z-index: 1;
 }
 
 .branch-line path {
@@ -99,7 +99,7 @@ html, body {
     position: relative;
     width: 50%;
     padding: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     z-index: 2;
 }
 
@@ -110,22 +110,21 @@ html, body {
 
 .caption {
     margin-top: 10px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     opacity: 0.8;
 }
 
-/* Left Side */
+/* Alternate Sides */
 .left {
     left: 0;
     text-align: right;
 }
 
-/* Right Side */
 .right {
     left: 50%;
 }
 
-/* Mobile Layout */
+/* Mobile */
 @media(max-width: 768px) {
 
     .branch-line {
@@ -151,45 +150,136 @@ html, body {
 
 <div class="screen">
 
-    <div class="header">
-        <h1>BRANCH ANALYSIS</h1>
-        <div class="subtext">MONITORING VARIANT ACTIVITY ACROSS TIMELINES</div>
-    </div>
+<div class="header">
+    <h1>BRANCH ANALYSIS</h1>
+    <div class="subtext">MONITORING VARIANT ACTIVITY</div>
+</div>
 
-    <div class="timeline">
+<div class="timeline">
 
-        <!-- Wavy Branch SVG -->
-        <svg class="branch-line" viewBox="0 0 100 2000" preserveAspectRatio="none">
-            <path d="M50 0 
-                     Q80 200 50 400 
-                     T50 800 
-                     T50 1200 
-                     T50 1600 
-                     T50 2000" />
-        </svg>
+<!-- Wavy SVG -->
+<svg class="branch-line" viewBox="0 0 100 4000" preserveAspectRatio="none">
+<path d="M50 0 
+         Q80 200 50 400 
+         T50 800 
+         T50 1200 
+         T50 1600 
+         T50 2000
+         T50 2400
+         T50 2800
+         T50 3200
+         T50 3600
+         T50 4000"/>
+</svg>
 
-        <div class="timeline-item left">
-            <img src="https://via.placeholder.com/400x500" alt="Photo 1">
-            <div class="caption">Branch Event #001 — Initial divergence recorded.</div>
-        </div>
+<!-- RANDOMIZED IMAGE ORDER -->
 
-        <div class="timeline-item right">
-            <img src="https://via.placeholder.com/400x500" alt="Photo 2">
-            <div class="caption">Branch Event #002 — Timeline instability increasing.</div>
-        </div>
+<div class="timeline-item left">
+    <img src="IMG_9321.jpeg" alt="">
+    <div class="caption">Temporal Archive Entry — Variant sighting logged.</div>
+</div>
 
-        <div class="timeline-item left">
-            <img src="https://via.placeholder.com/400x500" alt="Photo 3">
-            <div class="caption">Branch Event #003 — Nexus signature detected.</div>
-        </div>
+<div class="timeline-item right">
+    <img src="IMG_0638.jpeg" alt="">
+    <div class="caption">Branch deviation recorded.</div>
+</div>
 
-        <div class="timeline-item right">
-            <img src="https://via.placeholder.com/400x500" alt="Photo 4">
-            <div class="caption">Branch Event #004 — Temporal deviation confirmed.</div>
-        </div>
+<div class="timeline-item left">
+    <img src="DSC_1095.jpeg" alt="">
+    <div class="caption">Nexus fluctuation spike detected.</div>
+</div>
 
-    </div>
+<div class="timeline-item right">
+    <img src="IMG_2906.jpeg" alt="">
+    <div class="caption">Unauthorized timeline activity.</div>
+</div>
 
+<div class="timeline-item left">
+    <img src="IMG_0456.jpeg" alt="">
+    <div class="caption">Temporal variance under review.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_1728.jpeg" alt="">
+    <div class="caption">Branch growth accelerating.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_9292.jpeg" alt="">
+    <div class="caption">Multiversal anomaly flagged.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_1139.jpeg" alt="">
+    <div class="caption">Surveillance capture secured.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_9373.jpeg" alt="">
+    <div class="caption">Variant proximity confirmed.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_2408.jpeg" alt="">
+    <div class="caption">Timeline integrity compromised.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_3324.jpeg" alt="">
+    <div class="caption">Branch classification pending.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_0461.jpeg" alt="">
+    <div class="caption">Nexus signature expanding.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_9290.jpeg" alt="">
+    <div class="caption">Stability threshold exceeded.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_0676.jpeg" alt="">
+    <div class="caption">Temporal echo detected.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_1877.jpeg" alt="">
+    <div class="caption">Variant behavioral observation.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_9291.jpeg" alt="">
+    <div class="caption">Branch divergence confirmed.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_0454.jpeg" alt="">
+    <div class="caption">Chrono-displacement event.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_9633.jpeg" alt="">
+    <div class="caption">Timeline under surveillance.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_9320.jpeg" alt="">
+    <div class="caption">Anomaly containment attempt logged.</div>
+</div>
+
+<div class="timeline-item right">
+    <img src="IMG_2530.jpeg" alt="">
+    <div class="caption">Branch escalation event.</div>
+</div>
+
+<div class="timeline-item left">
+    <img src="IMG_9293.jpeg" alt="">
+    <div class="caption">Multiversal instability ongoing.</div>
+</div>
+
+</div>
 </div>
 
 </body>
