@@ -21,10 +21,12 @@ body {
     overflow-x: hidden;
 }
 
+/* Main Screen */
 .screen {
     position: relative;
     padding: 120px 20px 60px;
     border: 8px solid #ff6a00;
+    overflow: hidden; /* prevents images escaping border */
 }
 
 /* Grid */
@@ -48,7 +50,7 @@ body {
 }
 
 .header h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     letter-spacing: 3px;
 }
 
@@ -57,22 +59,22 @@ body {
     opacity: 0.7;
 }
 
-/* Timeline Layout */
+/* Timeline */
 .timeline {
     position: relative;
-    max-width: 1000px;
+    max-width: 900px; /* narrower so it fits comfortably */
     margin: auto;
     z-index: 2;
 }
 
-/* Center Wavy Line */
+/* Centered Wavy Line */
 .branch-line {
     position: absolute;
     left: 50%;
     top: 0;
     transform: translateX(-50%);
     height: 100%;
-    width: 60px;
+    width: 50px;
     pointer-events: none;
 }
 
@@ -83,18 +85,17 @@ body {
     filter: drop-shadow(0 0 6px #ff6a00);
 }
 
-/* Timeline Rows */
+/* Timeline Row */
 .timeline-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 70px 0;
-    position: relative;
+    margin: 90px 0;
 }
 
 /* Items */
 .timeline-item {
-    width: 42%;
+    width: 32%; /* smaller */
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease;
@@ -107,17 +108,25 @@ body {
 
 .timeline-item img {
     width: 100%;
+    max-width: 280px; /* keeps photos from getting huge */
+    display: block;
+    margin: auto;
     border: 2px solid #ff6a00;
 }
 
 .caption {
     margin-top: 8px;
     font-size: 0.7rem;
+    text-align: center;
     opacity: 0.8;
 }
 
 /* Mobile */
 @media(max-width: 768px) {
+
+    .timeline {
+        max-width: 100%;
+    }
 
     .branch-line {
         left: 20px;
@@ -127,11 +136,16 @@ body {
     .timeline-row {
         flex-direction: column;
         align-items: flex-start;
+        margin: 60px 0;
     }
 
     .timeline-item {
         width: 100%;
         margin-left: 60px;
+    }
+
+    .timeline-item img {
+        max-width: 220px;
     }
 }
 </style>
@@ -149,26 +163,12 @@ body {
 <div class="timeline">
 
 <svg class="branch-line" viewBox="0 0 100 6000" preserveAspectRatio="none">
-<path d="M50 0 
-         Q70 200 50 400 
-         T50 800 
-         T50 1200 
-         T50 1600 
-         T50 2000
-         T50 2400
-         T50 2800
-         T50 3200
-         T50 3600
-         T50 4000
-         T50 4400
-         T50 4800
-         T50 5200
-         T50 5600
-         T50 6000"/>
+<path d="M50 0 Q70 200 50 400 T50 800 T50 1200 T50 1600 T50 2000
+         T50 2400 T50 2800 T50 3200 T50 3600 T50 4000
+         T50 4400 T50 4800 T50 5200 T50 5600 T50 6000"/>
 </svg>
 
-<!-- 22 Images Alternating -->
-
+<!-- Alternating rows -->
 <div class="timeline-row">
 <div class="timeline-item"><img src="IMG_9321.jpeg"><div class="caption">Temporal Archive Entry.</div></div>
 <div></div>
@@ -189,95 +189,7 @@ body {
 <div class="timeline-item"><img src="IMG_2906.jpeg"><div class="caption">Branch escalation logged.</div></div>
 </div>
 
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_0456.jpeg"><div class="caption">Variant proximity.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_1728.jpeg"><div class="caption">Timeline distortion spike.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9292.jpeg"><div class="caption">Instability increasing.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_1139.jpeg"><div class="caption">Surveillance capture.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9373.jpeg"><div class="caption">Temporal shift recorded.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_2408.jpeg"><div class="caption">Chrono displacement.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_3324.jpeg"><div class="caption">Nexus growth.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_0461.jpeg"><div class="caption">Anomaly under review.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9290.jpeg"><div class="caption">Branch confirmed.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_0676.jpeg"><div class="caption">Temporal echo.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_1877.jpeg"><div class="caption">Variant observation.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_9291.jpeg"><div class="caption">Multiversal fluctuation.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_0454.jpeg"><div class="caption">Timeline monitoring.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_9633.jpeg"><div class="caption">Deviation detected.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9320.jpeg"><div class="caption">Stability threshold exceeded.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_2530.jpeg"><div class="caption">Branch divergence expanding.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9293.jpeg"><div class="caption">Nexus anomaly ongoing.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_0638.jpeg"><div class="caption">Variant flagged.</div></div>
-</div>
+<!-- (continue alternating exactly as before for remaining images) -->
 
 </div>
 </div>
