@@ -15,21 +15,21 @@
 }
 
 body {
-    background: #000000;
+    background: #000;
     font-family: 'Orbitron', sans-serif;
     color: #ff6a00;
     overflow-x: hidden;
 }
 
-/* Main Screen */
+/* Screen Frame */
 .screen {
     position: relative;
-    padding: 120px 20px 60px;
+    padding: 120px 20px 80px;
     border: 8px solid #ff6a00;
-    overflow: hidden; /* prevents images escaping border */
+    overflow: hidden;
 }
 
-/* Grid */
+/* Grid Background */
 .screen::before {
     content: "";
     position: absolute;
@@ -55,60 +55,61 @@ body {
 }
 
 .subtext {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     opacity: 0.7;
 }
 
-/* Timeline */
+/* Timeline Container */
 .timeline {
     position: relative;
-    max-width: 900px; /* narrower so it fits comfortably */
+    max-width: 900px;
     margin: auto;
     z-index: 2;
 }
 
-/* Centered Wavy Line */
-.branch-line {
+/* Center Wavy Trunk */
+.trunk {
     position: absolute;
     left: 50%;
-    top: 0;
     transform: translateX(-50%);
+    top: 0;
     height: 100%;
-    width: 50px;
+    width: 60px;
     pointer-events: none;
 }
 
-.branch-line path {
+.trunk path {
     stroke: #ff6a00;
     stroke-width: 3;
     fill: none;
     filter: drop-shadow(0 0 6px #ff6a00);
 }
 
-/* Timeline Row */
-.timeline-row {
+/* Rows */
+.row {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 90px 0;
 }
 
-/* Items */
-.timeline-item {
-    width: 32%; /* smaller */
+/* Timeline Items */
+.item {
+    width: 32%;
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s ease;
 }
 
-.timeline-item.show {
+.item.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-.timeline-item img {
+.item img {
     width: 100%;
-    max-width: 280px; /* keeps photos from getting huge */
+    max-width: 240px;
     display: block;
     margin: auto;
     border: 2px solid #ff6a00;
@@ -121,31 +122,52 @@ body {
     opacity: 0.8;
 }
 
+/* Curved Branch Connectors */
+.row::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    height: 60px;
+    border: 3px solid #ff6a00;
+    border-color: #ff6a00 transparent transparent transparent;
+    border-radius: 50% 50% 0 0;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 0 6px #ff6a00);
+}
+
+.row.left::before {
+    left: calc(50% - 60px);
+}
+
+.row.right::before {
+    right: calc(50% - 60px);
+    transform: translateY(-50%) scaleX(-1);
+}
+
 /* Mobile */
-@media(max-width: 768px) {
+@media(max-width:768px){
 
-    .timeline {
-        max-width: 100%;
-    }
-
-    .branch-line {
-        left: 20px;
+    .trunk {
+        left: 30px;
         transform: none;
     }
 
-    .timeline-row {
+    .row {
         flex-direction: column;
         align-items: flex-start;
-        margin: 60px 0;
+        margin: 70px 0;
     }
 
-    .timeline-item {
+    .item {
         width: 100%;
-        margin-left: 60px;
+        margin-left: 70px;
     }
 
-    .timeline-item img {
-        max-width: 220px;
+    .row::before {
+        left: 30px;
+        right: auto;
+        transform: translateY(-50%);
     }
 }
 </style>
@@ -162,40 +184,42 @@ body {
 
 <div class="timeline">
 
-<svg class="branch-line" viewBox="0 0 100 6000" preserveAspectRatio="none">
+<svg class="trunk" viewBox="0 0 100 6000" preserveAspectRatio="none">
 <path d="M50 0 Q70 200 50 400 T50 800 T50 1200 T50 1600 T50 2000
          T50 2400 T50 2800 T50 3200 T50 3600 T50 4000
          T50 4400 T50 4800 T50 5200 T50 5600 T50 6000"/>
 </svg>
 
-<!-- Alternating rows -->
-<div class="timeline-row">
-<div class="timeline-item"><img src="IMG_9321.jpeg"><div class="caption">Temporal Archive Entry.</div></div>
-<div></div>
-</div>
+<!-- ALL 22 IMAGES -->
 
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_0489.jpeg"><div class="caption">Nexus variance detected.</div></div>
-</div>
-
-<div class="timeline-row">
-<div class="timeline-item"><img src="DSC_1095.jpeg"><div class="caption">Multiversal anomaly.</div></div>
-<div></div>
-</div>
-
-<div class="timeline-row">
-<div></div>
-<div class="timeline-item"><img src="IMG_2906.jpeg"><div class="caption">Branch escalation logged.</div></div>
-</div>
-
-<!-- (continue alternating exactly as before for remaining images) -->
+<div class="row left"><div class="item"><img src="IMG_0638.jpeg"><div class="caption">Temporal Archive Entry</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_0676.jpeg"><div class="caption">Variant Event Logged</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_1139.jpeg"><div class="caption">Nexus Disturbance</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_1728.jpeg"><div class="caption">Branch Deviation</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_1877.jpeg"><div class="caption">Sacred Timeline Monitor</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_2408.jpeg"><div class="caption">Multiversal Drift</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_2530.jpeg"><div class="caption">Chrono Signal</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_2906.jpeg"><div class="caption">Variant Identified</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_3324.jpeg"><div class="caption">Timeline Interference</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_9290.jpeg"><div class="caption">Sacred Continuity</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_9291.jpeg"><div class="caption">Branch Stabilized</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_9292.jpeg"><div class="caption">Temporal Echo</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_9293.jpeg"><div class="caption">Variance Spike</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_9320.jpeg"><div class="caption">Nexus Surge</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_9321.jpeg"><div class="caption">Chrono Fragment</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_9373.jpeg"><div class="caption">Multiverse Drift</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_9633.jpeg"><div class="caption">Sacred Branch Archive</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="DSC_1095.jpeg"><div class="caption">Variant Scan Complete</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_0454.jpeg"><div class="caption">Timeline Mapping</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_0456.jpeg"><div class="caption">Branch Echo</div></div></div>
+<div class="row left"><div class="item"><img src="IMG_0461.jpeg"><div class="caption">Continuity Analysis</div></div><div></div></div>
+<div class="row right"><div></div><div class="item"><img src="IMG_0489.jpeg"><div class="caption">Nexus Lock Confirmed</div></div></div>
 
 </div>
 </div>
 
 <script>
-const items = document.querySelectorAll('.timeline-item');
+const items = document.querySelectorAll('.item');
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
