@@ -21,7 +21,6 @@ html, body {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Main Screen */
 .screen {
     position: relative;
     width: 100vw;
@@ -29,7 +28,6 @@ html, body {
     overflow: hidden;
 }
 
-/* Border + Grid (hidden initially) */
 .border-grid {
     position: absolute;
     inset: 0;
@@ -48,7 +46,6 @@ html, body {
     background-size: 40px 40px;
 }
 
-/* TVA Emblem */
 #emblem {
     position: absolute;
     top: 50%;
@@ -60,7 +57,6 @@ html, body {
     z-index: 5;
 }
 
-/* Centered Text */
 .content {
     position: absolute;
     top: 50%;
@@ -74,14 +70,12 @@ html, body {
     width: 90%;
 }
 
-/* Large Warning Text */
 .big-warning {
     font-size: 3rem;
     font-weight: 800;
     letter-spacing: 3px;
 }
 
-/* Flashing Warning */
 .flash {
     animation: flash 0.4s infinite;
 }
@@ -91,7 +85,6 @@ html, body {
     50%{opacity:0;}
 }
 
-/* Distortion */
 .distort::after {
     content: "";
     position: absolute;
@@ -112,7 +105,6 @@ html, body {
     100% { transform: translateY(10px); }
 }
 
-/* Full black flash overlay */
 .black-flash {
     position: absolute;
     inset: 0;
@@ -130,7 +122,6 @@ html, body {
     100% { opacity: 0; }
 }
 
-/* Fade out */
 .fade-out {
     animation: fadeOut 1s forwards;
 }
@@ -177,16 +168,18 @@ function typeText(message, speed = 50, callback) {
     typing();
 }
 
-function flashBlack(times, callback) {
+/* Updated flash function with speed control */
+function flashBlack(times, flashDuration = 150, gap = 120, callback) {
     let count = 0;
     function doFlash() {
         if (count < times) {
+            blackFlash.style.animationDuration = flashDuration + "ms";
             blackFlash.classList.add("active");
             setTimeout(() => {
                 blackFlash.classList.remove("active");
                 count++;
-                setTimeout(doFlash, 120);
-            }, 150);
+                setTimeout(doFlash, gap);
+            }, flashDuration);
         } else if (callback) {
             callback();
         }
@@ -199,11 +192,11 @@ window.onload = () => {
     /* Emblem appears */
     setTimeout(() => emblem.style.opacity = 1, 300);
 
-    /* Emblem fades */
-    setTimeout(() => emblem.style.opacity = 0, 1500);
+    /* Emblem fades — LINGER LONGER */
+    setTimeout(() => emblem.style.opacity = 0, 3000);  // was 1500
 
     /* Border + grid fade in */
-    setTimeout(() => borderGrid.style.opacity = 1, 2000);
+    setTimeout(() => borderGrid.style.opacity = 1, 3500);
 
     /* Begin text sequence */
     setTimeout(() => {
@@ -230,19 +223,24 @@ window.onload = () => {
 
                                     screen.classList.remove("distort");
 
-                                    /* Black flash sequence */
-                                    flashBlack(3, () => {
+                                    /* Original 3 flashes */
+                                    flashBlack(3, 150, 120, () => {
 
-                                        text.classList.remove("big-warning");
+                                        /* EXTRA FAST GLITCH FLASHES */
+                                        flashBlack(3, 70, 50, () => {
 
-                                        typeText("ACCESS GRANTED", 50, () => {
+                                            text.classList.remove("big-warning");
 
-                                            setTimeout(() => {
-                                                screen.classList.add("fade-out");
+                                            typeText("ACCESS GRANTED", 50, () => {
+
                                                 setTimeout(() => {
-                                                    window.location.href = "home.html";
+                                                    screen.classList.add("fade-out");
+                                                    setTimeout(() => {
+                                                        window.location.href = "home.html";
+                                                    }, 1000);
                                                 }, 1000);
-                                            }, 1000);
+
+                                            });
 
                                         });
 
@@ -261,7 +259,7 @@ window.onload = () => {
 
         });
 
-    }, 2500);
+    }, 4000); // adjusted to match longer emblem linger
 };
 </script>
 
