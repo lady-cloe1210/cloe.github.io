@@ -3,238 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRANCH ANALYSIS</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Branch Analysis</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ---------------- GLOBAL ---------------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    background:#000;
-    font-family:'Orbitron',sans-serif;
-    color:#ff6a00;
-    overflow-x:hidden;
+body {
+    background: #0a0a0a;
+    color: #ff6a00;
+    font-family: 'Courier New', monospace;
 }
 
-.screen{
-    position:relative;
-    padding:120px 20px 80px;
-    border:8px solid #ff6a00;
-    overflow:hidden;
+/* Main orange border container */
+.page-wrapper {
+    border: 6px solid #ff6a00;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 30px 0 60px 0;
 }
 
-/* Grid Background */
-.screen::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:
-        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
-    background-size:40px 40px;
-    z-index:0;
+/* ---------------- HEADER TEXT ---------------- */
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.header{
-    position:absolute;
-    top:30px;
-    left:30px;
-    z-index:2;
+.header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
 }
 
-.header h1{
-    font-size:1.2rem;
-    letter-spacing:3px;
+.header h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    opacity: 0.8;
+    margin-top: 5px;
 }
 
-.subtext{
-    font-size:0.7rem;
-    opacity:0.7;
+/* ---------------- TOP BRANCH IMAGE ---------------- */
+
+.branch-container {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 60px;
 }
 
-/* Timeline Layout */
-.timeline{
-    position:relative;
-    max-width:900px;
-    margin:auto;
-    display:grid;
-    grid-template-columns: 1fr 80px 1fr;
-    z-index:2;
+.branch-container img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-/* Center Trunk */
-.trunk{
-    grid-column:2;
-    width:80px;
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    top:0;
-    height:100%;
-    pointer-events:none;
+/* ---------------- PHOTO GRID ---------------- */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    padding: 0 30px;
 }
 
-.trunk path{
-    stroke:#ff6a00;
-    stroke-width:3;
-    fill:none;
-    filter:drop-shadow(0 0 6px #ff6a00);
+.photo-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
 }
 
-/* Timeline Items */
-.item{
-    margin:90px 0;
-    opacity:0;
-    transform:translateY(40px);
-    transition:all 0.8s ease;
+.photo-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.item.show{
-    opacity:1;
-    transform:translateY(0);
+.photo-item img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ff6a00;
+    border-radius: 8px;
 }
 
-.left{
-    grid-column:1;
-    text-align:right;
-    padding-right:40px;
-    position:relative;
+.caption {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
 }
 
-.right{
-    grid-column:3;
-    text-align:left;
-    padding-left:40px;
-    position:relative;
-}
+/* ---------------- RESPONSIVE TWEAKS ---------------- */
 
-.item img{
-    width:100%;
-    max-width:220px;
-    border:2px solid #ff6a00;
-}
-
-.caption{
-    margin-top:8px;
-    font-size:0.7rem;
-    opacity:0.8;
-}
-
-/* Curved Branch Connectors */
-.left::after,
-.right::after{
-    content:"";
-    position:absolute;
-    top:50%;
-    width:100px;
-    height:60px;
-    border:3px solid #ff6a00;
-    border-color:#ff6a00 transparent transparent transparent;
-    border-radius:50% 50% 0 0;
-    transform:translateY(-50%);
-    filter:drop-shadow(0 0 6px #ff6a00);
-}
-
-.left::after{
-    right:-20px;
-}
-
-.right::after{
-    left:-20px;
-    transform:translateY(-50%) scaleX(-1);
-}
-
-/* Mobile */
-@media(max-width:768px){
-
-    .timeline{
-        grid-template-columns: 40px 1fr;
+@media (min-width: 900px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
-
-    .trunk{
-        left:20px;
-        transform:none;
-    }
-
-    .left, .right{
-        grid-column:2;
-        text-align:left;
-        padding-left:60px;
-        padding-right:0;
-    }
-
-    .left::after, .right::after{
-        left:-30px;
-        right:auto;
-        transform:translateY(-50%);
-    }
-
 }
 </style>
 </head>
 
 <body>
 
-<div class="screen">
+<div class="page-wrapper">
 
-<div class="header">
-<h1>BRANCH ANALYSIS</h1>
-<div class="subtext">MONITORING VARIANT ACTIVITY</div>
-</div>
+    <div class="header">
+        <h1>BRANCH ANALYSIS</h1>
+        <h2>Monitoring Variant Activity</h2>
+    </div>
 
-<div class="timeline">
+    <!-- Top Timeline Image -->
+    <div class="branch-container">
+        <img src="branch_analysis.png" alt="Branch Timeline Monitor">
+    </div>
 
-<svg class="trunk" viewBox="0 0 100 6000" preserveAspectRatio="none">
-<path d="M50 0 Q70 200 50 400 T50 800 T50 1200 T50 1600 T50 2000
-         T50 2400 T50 2800 T50 3200 T50 3600 T50 4000
-         T50 4400 T50 4800 T50 5200 T50 5600 T50 6000"/>
-</svg>
+    <!-- Photo Grid -->
+    <div class="gallery">
 
-<!-- 22 Photos Alternating -->
+        <!-- Replace image filenames below with your exact filenames if needed -->
 
-<div class="item left"><img src="./IMG_0638.jpeg"><div class="caption">Temporal Archive Entry</div></div>
-<div class="item right"><img src="./IMG_0676.jpeg"><div class="caption">Variant Event Logged</div></div>
-<div class="item left"><img src="./IMG_1139.jpeg"><div class="caption">Nexus Disturbance</div></div>
-<div class="item right"><img src="./IMG_1728.jpeg"><div class="caption">Branch Deviation</div></div>
-<div class="item left"><img src="./IMG_1877.jpeg"><div class="caption">Sacred Timeline Monitor</div></div>
-<div class="item right"><img src="./IMG_2408.jpeg"><div class="caption">Multiversal Drift</div></div>
-<div class="item left"><img src="./IMG_2530.jpeg"><div class="caption">Chrono Signal</div></div>
-<div class="item right"><img src="./IMG_2906.jpeg"><div class="caption">Variant Identified</div></div>
-<div class="item left"><img src="./IMG_3324.jpeg"><div class="caption">Timeline Interference</div></div>
-<div class="item right"><img src="./IMG_9290.jpeg"><div class="caption">Sacred Continuity</div></div>
-<div class="item left"><img src="./IMG_9291.jpeg"><div class="caption">Branch Stabilized</div></div>
-<div class="item right"><img src="./IMG_9292.jpeg"><div class="caption">Temporal Echo</div></div>
-<div class="item left"><img src="./IMG_9293.jpeg"><div class="caption">Variance Spike</div></div>
-<div class="item right"><img src="./IMG_9320.jpeg"><div class="caption">Nexus Surge</div></div>
-<div class="item left"><img src="./IMG_9321.jpeg"><div class="caption">Chrono Fragment</div></div>
-<div class="item right"><img src="./IMG_9373.jpeg"><div class="caption">Multiverse Drift</div></div>
-<div class="item left"><img src="./IMG_9633.jpeg"><div class="caption">Sacred Branch Archive</div></div>
-<div class="item right"><img src="./DSC_1095.jpeg"><div class="caption">Variant Scan Complete</div></div>
-<div class="item left"><img src="./IMG_0454.jpeg"><div class="caption">Timeline Mapping</div></div>
-<div class="item right"><img src="./IMG_0456.jpeg"><div class="caption">Branch Echo</div></div>
-<div class="item left"><img src="./IMG_0461.jpeg"><div class="caption">Continuity Analysis</div></div>
-<div class="item right"><img src="./IMG_0489.jpeg"><div class="caption">Nexus Lock Confirmed</div></div>
+        <div class="photo-item">
+            <img src="IMG_0638.jpeg" alt="">
+            <div class="caption">Temporal Archive Entry</div>
+        </div>
 
-</div>
+        <div class="photo-item">
+            <img src="IMG_0676.jpeg" alt="">
+            <div class="caption">Variant Event Logged</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0712.jpeg" alt="">
+            <div class="caption">Timeline Divergence</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0745.jpeg" alt="">
+            <div class="caption">Branch Expansion</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0812.jpeg" alt="">
+            <div class="caption">Field Observation</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0850.jpeg" alt="">
+            <div class="caption">Nexus Event</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0903.jpeg" alt="">
+            <div class="caption">Variant Contained</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_0944.jpeg" alt="">
+            <div class="caption">Sacred Timeline</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1001.jpeg" alt="">
+            <div class="caption">Chrono Displacement</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1048.jpeg" alt="">
+            <div class="caption">Field Log Entry</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1102.jpeg" alt="">
+            <div class="caption">Temporal Survey</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1137.jpeg" alt="">
+            <div class="caption">Monitoring Sequence</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1189.jpeg" alt="">
+            <div class="caption">Variant Signal</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1220.jpeg" alt="">
+            <div class="caption">Time Stream Node</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1264.jpeg" alt="">
+            <div class="caption">Chrono Archive</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1301.jpeg" alt="">
+            <div class="caption">Branch Nexus</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1347.jpeg" alt="">
+            <div class="caption">Variant Report</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1390.jpeg" alt="">
+            <div class="caption">Temporal Activity</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1425.jpeg" alt="">
+            <div class="caption">Field Record</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1478.jpeg" alt="">
+            <div class="caption">Sacred Timeline Sync</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1503.jpeg" alt="">
+            <div class="caption">Variant Alert</div>
+        </div>
+
+        <div class="photo-item">
+            <img src="IMG_1540.jpeg" alt="">
+            <div class="caption">End of Log</div>
+        </div>
+
+    </div>
 </div>
 
 <script>
-const items = document.querySelectorAll('.item');
-
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('show');
-}
+/* Fade-in on scroll */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.2
 });
-},{threshold:0.2});
 
-items.forEach(item=>observer.observe(item));
+document.querySelectorAll('.photo-item').forEach(item => {
+    observer.observe(item);
+});
 </script>
 
 </body>
