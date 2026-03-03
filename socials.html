@@ -3,122 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Timeline Archive</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Social Nodes</title>
 
 <style>
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    overflow: hidden;
-    background: black;
-    font-family: 'Orbitron', sans-serif;
+body {
+    background: #0a0a0a;
     color: #ff6a00;
+    font-family: 'Courier New', monospace;
 }
 
-/* TVA Frame */
-.screen {
-    position: relative;
-    width: 100vw;
-    height: 100dvh;
-    border: 8px solid #ff6a00;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* Grid Background */
-.screen::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,106,0,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,106,0,0.08) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
+.page-wrapper {
+    border: 6px solid #ff6a00;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 40px 20px 60px 20px;
 }
 
 /* Header */
+
 .header {
-    position: relative;
-    z-index: 2;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .header h1 {
-    font-size: 1.6rem;
-    letter-spacing: 3px;
+    font-size: 2.5rem;
+    letter-spacing: 4px;
 }
 
-.header p {
-    font-size: 0.85rem;
-    opacity: 0.7;
+.header h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    opacity: 0.8;
+    margin-top: 8px;
 }
 
-/* Archive Panel */
-.archive-panel {
-    position: relative;
-    z-index: 2;
-    width: 90%;
-    max-width: 500px;
+/* Social Node Container */
+
+.social-container {
+    max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
-/* Social Module */
-.social-module {
-    border: 3px solid #ff6a00;
-    padding: 15px;
+/* Individual Node */
+
+.social-node {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    color: #ff6a00;
+    gap: 25px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
 }
 
-/* Icon Box */
-.icon-box {
-    width: 50px;
-    height: 50px;
+.social-node.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Logo Image */
+
+.social-node img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
     border: 3px solid #ff6a00;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 12px;
+    padding: 10px;
+    background: #111;
 }
 
-/* Label */
-.social-label {
-    font-weight: 600;
-    letter-spacing: 2px;
-    flex-grow: 1;
+/* Button */
+
+.social-button {
+    flex: 1;
     text-align: center;
+    padding: 18px;
+    border: 3px solid #ff6a00;
+    color: #ff6a00;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-/* Small TVA arrows */
-.arrow {
-    font-size: 1.2rem;
+.social-button:hover {
+    background: #ff6a00;
+    color: #0a0a0a;
+    transform: scale(1.02);
 }
 
-/* Optional subtle tap effect */
-.social-module:active {
-    background: rgba(255,106,0,0.1);
-}
+/* Responsive */
 
-/* Mobile font adjust */
-@media(max-width: 500px) {
-    .social-label {
-        font-size: 0.9rem;
+@media (max-width: 600px) {
+    .social-node {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-button {
+        width: 100%;
     }
 }
 </style>
@@ -126,63 +120,73 @@ html, body {
 
 <body>
 
-<div class="screen">
+<div class="page-wrapper">
 
     <div class="header">
-        <h1>TIMELINE ARCHIVE</h1>
-        <p>External Temporal Signal Monitoring</p>
+        <h1>SOCIAL NODES</h1>
+        <h2>External Timeline Access Points</h2>
     </div>
 
-    <div class="archive-panel">
+    <div class="social-container">
 
-        <!-- FACEBOOK -->
-        <a href="#" class="social-module">
-            <div class="icon-box">
-                F
-            </div>
-            <div class="social-label">FACEBOOK NODE</div>
-            <div class="arrow">></div>
-        </a>
+        <!-- Spotify -->
+        <div class="social-node">
+            <img src="music.png" alt="Spotify Logo">
+            <a class="social-button" href="https://open.spotify.com/user/1wkymgbftb2o7es2pbw81c58l?si=dc1b7ef543f84c3b" target="_blank">
+                SPOTIFY NODE
+            </a>
+        </div>
 
-        <!-- INSTAGRAM -->
-        <a href="#" class="social-module">
-            <div class="icon-box">
-                IG
-            </div>
-            <div class="social-label">INSTAGRAM NODE</div>
-            <div class="arrow">></div>
-        </a>
+        <!-- TikTok -->
+        <div class="social-node">
+            <img src="tiktok.png" alt="TikTok Logo">
+            <a class="social-button" href="https://www.tiktok.com/@clorissaengland" target="_blank">
+                TIKTOK NODE
+            </a>
+        </div>
 
-        <!-- TIKTOK -->
-        <a href="#" class="social-module">
-            <div class="icon-box">
-                TT
-            </div>
-            <div class="social-label">TIKTOK NODE</div>
-            <div class="arrow">></div>
-        </a>
+        <!-- Instagram -->
+        <div class="social-node">
+            <img src="instagram.png" alt="Instagram Logo">
+            <a class="social-button" href="https://www.instagram.com/chicks_1210" target="_blank">
+                INSTAGRAM NODE
+            </a>
+        </div>
 
-        <!-- OPTIONAL: YOUTUBE -->
-        <a href="#" class="social-module">
-            <div class="icon-box">
-                YT
-            </div>
-            <div class="social-label">YOUTUBE NODE</div>
-            <div class="arrow">></div>
-        </a>
+        <!-- Facebook -->
+        <div class="social-node">
+            <img src="facebook.png" alt="Facebook Logo">
+            <a class="social-button" href="https://facebook.com/cloe.england" target="_blank">
+                FACEBOOK NODE
+            </a>
+        </div>
 
-        <!-- OPTIONAL: THREADS -->
-        <a href="#" class="social-module">
-            <div class="icon-box">
-                TH
-            </div>
-            <div class="social-label">THREADS NODE</div>
-            <div class="arrow">></div>
-        </a>
+        <!-- LinkedIn -->
+        <div class="social-node">
+            <img src="linkedin.png" alt="LinkedIn Logo">
+            <a class="social-button" href="https://www.linkedin.com/in/clorissa-hicks-51564129" target="_blank">
+                LINKEDIN NODE
+            </a>
+        </div>
 
     </div>
 
 </div>
+
+<script>
+/* Fade-in on scroll */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.social-node').forEach(node => {
+    observer.observe(node);
+});
+</script>
 
 </body>
 </html>
